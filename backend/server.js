@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
 const app = express();
 app.use(cors());
 app.use(express.json());
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 const JWT_SECRET = process.env.JWT_SECRET || 'musicappsecret';
 
 // Connect to MongoDB. MONGO_URI must be provided in .env
@@ -137,5 +137,5 @@ initDB().then(() => {
   app.use('/songs', express.static(path.join(__dirname, 'public', 'songs')));
   app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
 
-  app.listen(PORT, ()=>console.log('Server running on port', PORT));
+  app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));
 }).catch(err => console.error(err));
