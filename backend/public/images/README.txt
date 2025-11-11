@@ -1,0 +1,1 @@
+Place your image files here (jpg/png). Filenames should match backend/data/songs.js entries (e.g. sample1.jpg)

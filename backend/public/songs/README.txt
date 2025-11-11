@@ -1,0 +1,1 @@
+Place your .mp3 files here. Filenames should match backend/data/songs.js entries (e.g. sample1.mp3)
