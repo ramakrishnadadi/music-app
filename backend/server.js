@@ -133,6 +133,11 @@ initDB().then(() => {
     return res.json({ name: user.name, email: user.email, favourites: user.favourites, playlists: user.playlists });
   });
 
+  // Add a simple root route to check if the server is running
+  app.get('/', (req, res) => {
+    res.send('Music App Backend is running!');
+  });
+
   // Serve frontend static files if built (optional)
   app.use('/songs', express.static(path.join(__dirname, 'public', 'songs')));
   app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
