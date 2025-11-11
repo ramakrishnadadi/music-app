@@ -1,0 +1,31 @@
+services:
+  # Backend Service (Node.js)
+  - type: web
+    name: musicapp-backend
+    env: node
+    # Specifies that the backend code is in the 'backend' directory
+    rootDir: backend
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    envVars:
+      - key: NODE_VERSION
+        value: 20 # Or a version compatible with your project
+      - key: MONGO_URI
+        sync: false # Set this in the Render dashboard
+      - key: JWT_SECRET
+        sync: false # Set this in the Render dashboard
+
+  # Frontend Service (React)
+  - type: static
+    name: musicapp-frontend
+    # Specifies that the frontend code is in the 'frontend' directory
+    rootDir: frontend
+    plan: free
+    buildCommand: "npm install && npm run build"
+    publishDir: build
+    # Rewrites all paths to index.html for client-side routing
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
