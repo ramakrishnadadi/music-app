@@ -9,7 +9,18 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 const app = express();
-app.use(cors());
+
+// Configure CORS to allow requests from your frontend
+const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:3000'];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 app.use(express.json());
 const PORT = process.env.PORT || 10000;
 const JWT_SECRET = process.env.JWT_SECRET || 'musicappsecret';
